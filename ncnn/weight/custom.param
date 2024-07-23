@@ -1,0 +1,103 @@
+7767517
+101 114
+Input            input                    0 1 input
+Convolution      /conv1/conv1.0/Conv      1 1 input /conv1/conv1.0/Conv_output_0 0=32 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=864
+PReLU            /conv1/conv1.2/PRelu     1 1 /conv1/conv1.0/Conv_output_0 /conv1/conv1.2/PRelu_output_0 0=1
+Split            splitncnn_0              1 2 /conv1/conv1.2/PRelu_output_0 /conv1/conv1.2/PRelu_output_0_splitncnn_0 /conv1/conv1.2/PRelu_output_0_splitncnn_1
+Convolution      /ir_shuffle1/conv_1/conv_1.0/Conv 1 1 /conv1/conv1.2/PRelu_output_0_splitncnn_1 /ir_shuffle1/conv_1/conv_1.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3072
+PReLU            /ir_shuffle1/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle1/conv_1/conv_1.0/Conv_output_0 /ir_shuffle1/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle1/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle1/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle1/DWconv_2/DWconv_2.0/Conv_output_0 0=96 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=864 7=96
+PReLU            /ir_shuffle1/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle1/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle1/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle1/conv_3/conv_3.0/Conv 1 1 /ir_shuffle1/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle1/conv_3/conv_3.0/Conv_output_0 0=16 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1536
+ConvolutionDepthWise /ir_shuffle1/DWconv_4/DWconv_4.0/Conv 1 1 /conv1/conv1.2/PRelu_output_0_splitncnn_0 /ir_shuffle1/DWconv_4/DWconv_4.0/Conv_output_0 0=64 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=576 7=32
+PReLU            /ir_shuffle1/DWconv_4/DWconv_4.2/PRelu 1 1 /ir_shuffle1/DWconv_4/DWconv_4.0/Conv_output_0 /ir_shuffle1/DWconv_4/DWconv_4.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle1/conv_5/conv_5.0/Conv 1 1 /ir_shuffle1/DWconv_4/DWconv_4.2/PRelu_output_0 /ir_shuffle1/conv_5/conv_5.0/Conv_output_0 0=32 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2048
+Concat           /ir_shuffle1/Concat      2 1 /ir_shuffle1/conv_3/conv_3.0/Conv_output_0 /ir_shuffle1/conv_5/conv_5.0/Conv_output_0 /ir_shuffle1/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle1/channel_shuffle/Reshape_1 1 1 /ir_shuffle1/Concat_output_0 /ir_shuffle1/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Split            splitncnn_1              1 2 /ir_shuffle1/channel_shuffle/Reshape_1_output_0 /ir_shuffle1/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle1/channel_shuffle/Reshape_1_output_0_splitncnn_1
+Crop             /ir_shuffle2/Slice       1 1 /ir_shuffle1/channel_shuffle/Reshape_1_output_0_splitncnn_1 /ir_shuffle2/Slice_output_0 -23309=1,24 -23310=1,2147483647 -23311=1,0
+Crop             /ir_shuffle2/Slice_1     1 1 /ir_shuffle1/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle2/Slice_1_output_0 -23309=1,0 -23310=1,24 -23311=1,0
+Split            splitncnn_2              1 2 /ir_shuffle2/Slice_1_output_0 /ir_shuffle2/Slice_1_output_0_splitncnn_0 /ir_shuffle2/Slice_1_output_0_splitncnn_1
+Convolution      /ir_shuffle2/conv_1/conv_1.0/Conv 1 1 /ir_shuffle2/Slice_1_output_0_splitncnn_1 /ir_shuffle2/conv_1/conv_1.0/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1152
+PReLU            /ir_shuffle2/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle2/conv_1/conv_1.0/Conv_output_0 /ir_shuffle2/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle2/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle2/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle2/DWconv_2/DWconv_2.0/Conv_output_0 0=48 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=432 7=48
+PReLU            /ir_shuffle2/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle2/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle2/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle2/conv_3/conv_3.0/Conv 1 1 /ir_shuffle2/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle2/conv_3/conv_3.0/Conv_output_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1152
+BinaryOp         /ir_shuffle2/Add         2 1 /ir_shuffle2/conv_3/conv_3.0/Conv_output_0 /ir_shuffle2/Slice_1_output_0_splitncnn_0 /ir_shuffle2/Add_output_0 0=0
+Concat           /ir_shuffle2/Concat      2 1 /ir_shuffle2/Add_output_0 /ir_shuffle2/Slice_output_0 /ir_shuffle2/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle2/channel_shuffle/Reshape_1 1 1 /ir_shuffle2/Concat_output_0 /ir_shuffle2/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Split            splitncnn_3              1 2 /ir_shuffle2/channel_shuffle/Reshape_1_output_0 /ir_shuffle2/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle2/channel_shuffle/Reshape_1_output_0_splitncnn_1
+Convolution      /ir_shuffle3/conv_1/conv_1.0/Conv 1 1 /ir_shuffle2/channel_shuffle/Reshape_1_output_0_splitncnn_1 /ir_shuffle3/conv_1/conv_1.0/Conv_output_0 0=192 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9216
+PReLU            /ir_shuffle3/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle3/conv_1/conv_1.0/Conv_output_0 /ir_shuffle3/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle3/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle3/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle3/DWconv_2/DWconv_2.0/Conv_output_0 0=192 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=1728 7=192
+PReLU            /ir_shuffle3/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle3/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle3/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle3/conv_3/conv_3.0/Conv 1 1 /ir_shuffle3/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle3/conv_3/conv_3.0/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9216
+ConvolutionDepthWise /ir_shuffle3/DWconv_4/DWconv_4.0/Conv 1 1 /ir_shuffle2/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle3/DWconv_4/DWconv_4.0/Conv_output_0 0=96 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=864 7=48
+PReLU            /ir_shuffle3/DWconv_4/DWconv_4.2/PRelu 1 1 /ir_shuffle3/DWconv_4/DWconv_4.0/Conv_output_0 /ir_shuffle3/DWconv_4/DWconv_4.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle3/conv_5/conv_5.0/Conv 1 1 /ir_shuffle3/DWconv_4/DWconv_4.2/PRelu_output_0 /ir_shuffle3/conv_5/conv_5.0/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+Concat           /ir_shuffle3/Concat      2 1 /ir_shuffle3/conv_3/conv_3.0/Conv_output_0 /ir_shuffle3/conv_5/conv_5.0/Conv_output_0 /ir_shuffle3/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle3/channel_shuffle/Reshape_1 1 1 /ir_shuffle3/Concat_output_0 /ir_shuffle3/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Split            splitncnn_4              1 2 /ir_shuffle3/channel_shuffle/Reshape_1_output_0 /ir_shuffle3/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle3/channel_shuffle/Reshape_1_output_0_splitncnn_1
+Crop             /ir_shuffle4/Slice       1 1 /ir_shuffle3/channel_shuffle/Reshape_1_output_0_splitncnn_1 /ir_shuffle4/Slice_output_0 -23309=1,48 -23310=1,2147483647 -23311=1,0
+Crop             /ir_shuffle4/Slice_1     1 1 /ir_shuffle3/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle4/Slice_1_output_0 -23309=1,0 -23310=1,48 -23311=1,0
+Split            splitncnn_5              1 2 /ir_shuffle4/Slice_1_output_0 /ir_shuffle4/Slice_1_output_0_splitncnn_0 /ir_shuffle4/Slice_1_output_0_splitncnn_1
+Convolution      /ir_shuffle4/conv_1/conv_1.0/Conv 1 1 /ir_shuffle4/Slice_1_output_0_splitncnn_1 /ir_shuffle4/conv_1/conv_1.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+PReLU            /ir_shuffle4/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle4/conv_1/conv_1.0/Conv_output_0 /ir_shuffle4/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle4/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle4/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle4/DWconv_2/DWconv_2.0/Conv_output_0 0=96 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=864 7=96
+PReLU            /ir_shuffle4/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle4/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle4/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle4/conv_3/conv_3.0/Conv 1 1 /ir_shuffle4/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle4/conv_3/conv_3.0/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+BinaryOp         /ir_shuffle4/Add         2 1 /ir_shuffle4/conv_3/conv_3.0/Conv_output_0 /ir_shuffle4/Slice_1_output_0_splitncnn_0 /ir_shuffle4/Add_output_0 0=0
+Concat           /ir_shuffle4/Concat      2 1 /ir_shuffle4/Add_output_0 /ir_shuffle4/Slice_output_0 /ir_shuffle4/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle4/channel_shuffle/Reshape_1 1 1 /ir_shuffle4/Concat_output_0 /ir_shuffle4/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Split            splitncnn_6              1 2 /ir_shuffle4/channel_shuffle/Reshape_1_output_0 /ir_shuffle4/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle4/channel_shuffle/Reshape_1_output_0_splitncnn_1
+Crop             /ir_shuffle5/Slice       1 1 /ir_shuffle4/channel_shuffle/Reshape_1_output_0_splitncnn_1 /ir_shuffle5/Slice_output_0 -23309=1,48 -23310=1,2147483647 -23311=1,0
+Crop             /ir_shuffle5/Slice_1     1 1 /ir_shuffle4/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle5/Slice_1_output_0 -23309=1,0 -23310=1,48 -23311=1,0
+Split            splitncnn_7              1 2 /ir_shuffle5/Slice_1_output_0 /ir_shuffle5/Slice_1_output_0_splitncnn_0 /ir_shuffle5/Slice_1_output_0_splitncnn_1
+Convolution      /ir_shuffle5/conv_1/conv_1.0/Conv 1 1 /ir_shuffle5/Slice_1_output_0_splitncnn_1 /ir_shuffle5/conv_1/conv_1.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+PReLU            /ir_shuffle5/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle5/conv_1/conv_1.0/Conv_output_0 /ir_shuffle5/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle5/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle5/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle5/DWconv_2/DWconv_2.0/Conv_output_0 0=96 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=864 7=96
+PReLU            /ir_shuffle5/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle5/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle5/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle5/conv_3/conv_3.0/Conv 1 1 /ir_shuffle5/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle5/conv_3/conv_3.0/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+BinaryOp         /ir_shuffle5/Add         2 1 /ir_shuffle5/conv_3/conv_3.0/Conv_output_0 /ir_shuffle5/Slice_1_output_0_splitncnn_0 /ir_shuffle5/Add_output_0 0=0
+Concat           /ir_shuffle5/Concat      2 1 /ir_shuffle5/Add_output_0 /ir_shuffle5/Slice_output_0 /ir_shuffle5/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle5/channel_shuffle/Reshape_1 1 1 /ir_shuffle5/Concat_output_0 /ir_shuffle5/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Split            splitncnn_8              1 2 /ir_shuffle5/channel_shuffle/Reshape_1_output_0 /ir_shuffle5/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle5/channel_shuffle/Reshape_1_output_0_splitncnn_1
+Crop             /ir_shuffle6/Slice       1 1 /ir_shuffle5/channel_shuffle/Reshape_1_output_0_splitncnn_1 /ir_shuffle6/Slice_output_0 -23309=1,48 -23310=1,2147483647 -23311=1,0
+Crop             /ir_shuffle6/Slice_1     1 1 /ir_shuffle5/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle6/Slice_1_output_0 -23309=1,0 -23310=1,48 -23311=1,0
+Split            splitncnn_9              1 2 /ir_shuffle6/Slice_1_output_0 /ir_shuffle6/Slice_1_output_0_splitncnn_0 /ir_shuffle6/Slice_1_output_0_splitncnn_1
+Convolution      /ir_shuffle6/conv_1/conv_1.0/Conv 1 1 /ir_shuffle6/Slice_1_output_0_splitncnn_1 /ir_shuffle6/conv_1/conv_1.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+PReLU            /ir_shuffle6/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle6/conv_1/conv_1.0/Conv_output_0 /ir_shuffle6/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle6/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle6/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle6/DWconv_2/DWconv_2.0/Conv_output_0 0=96 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=864 7=96
+PReLU            /ir_shuffle6/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle6/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle6/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle6/conv_3/conv_3.0/Conv 1 1 /ir_shuffle6/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle6/conv_3/conv_3.0/Conv_output_0 0=48 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4608
+BinaryOp         /ir_shuffle6/Add         2 1 /ir_shuffle6/conv_3/conv_3.0/Conv_output_0 /ir_shuffle6/Slice_1_output_0_splitncnn_0 /ir_shuffle6/Add_output_0 0=0
+Concat           /ir_shuffle6/Concat      2 1 /ir_shuffle6/Add_output_0 /ir_shuffle6/Slice_output_0 /ir_shuffle6/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle6/channel_shuffle/Reshape_1 1 1 /ir_shuffle6/Concat_output_0 /ir_shuffle6/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Split            splitncnn_10             1 2 /ir_shuffle6/channel_shuffle/Reshape_1_output_0 /ir_shuffle6/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle6/channel_shuffle/Reshape_1_output_0_splitncnn_1
+Convolution      /ir_shuffle7/conv_1/conv_1.0/Conv 1 1 /ir_shuffle6/channel_shuffle/Reshape_1_output_0_splitncnn_1 /ir_shuffle7/conv_1/conv_1.0/Conv_output_0 0=192 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18432
+PReLU            /ir_shuffle7/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle7/conv_1/conv_1.0/Conv_output_0 /ir_shuffle7/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle7/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle7/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle7/DWconv_2/DWconv_2.0/Conv_output_0 0=192 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=1728 7=192
+PReLU            /ir_shuffle7/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle7/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle7/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle7/conv_3/conv_3.0/Conv 1 1 /ir_shuffle7/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle7/conv_3/conv_3.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18432
+ConvolutionDepthWise /ir_shuffle7/DWconv_4/DWconv_4.0/Conv 1 1 /ir_shuffle6/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle7/DWconv_4/DWconv_4.0/Conv_output_0 0=192 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=1728 7=96
+PReLU            /ir_shuffle7/DWconv_4/DWconv_4.2/PRelu 1 1 /ir_shuffle7/DWconv_4/DWconv_4.0/Conv_output_0 /ir_shuffle7/DWconv_4/DWconv_4.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle7/conv_5/conv_5.0/Conv 1 1 /ir_shuffle7/DWconv_4/DWconv_4.2/PRelu_output_0 /ir_shuffle7/conv_5/conv_5.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18432
+Concat           /ir_shuffle7/Concat      2 1 /ir_shuffle7/conv_3/conv_3.0/Conv_output_0 /ir_shuffle7/conv_5/conv_5.0/Conv_output_0 /ir_shuffle7/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle7/channel_shuffle/Reshape_1 1 1 /ir_shuffle7/Concat_output_0 /ir_shuffle7/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Split            splitncnn_11             1 2 /ir_shuffle7/channel_shuffle/Reshape_1_output_0 /ir_shuffle7/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle7/channel_shuffle/Reshape_1_output_0_splitncnn_1
+Crop             /ir_shuffle8/Slice       1 1 /ir_shuffle7/channel_shuffle/Reshape_1_output_0_splitncnn_1 /ir_shuffle8/Slice_output_0 -23309=1,96 -23310=1,2147483647 -23311=1,0
+Crop             /ir_shuffle8/Slice_1     1 1 /ir_shuffle7/channel_shuffle/Reshape_1_output_0_splitncnn_0 /ir_shuffle8/Slice_1_output_0 -23309=1,0 -23310=1,96 -23311=1,0
+Split            splitncnn_12             1 2 /ir_shuffle8/Slice_1_output_0 /ir_shuffle8/Slice_1_output_0_splitncnn_0 /ir_shuffle8/Slice_1_output_0_splitncnn_1
+Convolution      /ir_shuffle8/conv_1/conv_1.0/Conv 1 1 /ir_shuffle8/Slice_1_output_0_splitncnn_1 /ir_shuffle8/conv_1/conv_1.0/Conv_output_0 0=192 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18432
+PReLU            /ir_shuffle8/conv_1/conv_1.2/PRelu 1 1 /ir_shuffle8/conv_1/conv_1.0/Conv_output_0 /ir_shuffle8/conv_1/conv_1.2/PRelu_output_0 0=1
+ConvolutionDepthWise /ir_shuffle8/DWconv_2/DWconv_2.0/Conv 1 1 /ir_shuffle8/conv_1/conv_1.2/PRelu_output_0 /ir_shuffle8/DWconv_2/DWconv_2.0/Conv_output_0 0=192 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=1728 7=192
+PReLU            /ir_shuffle8/DWconv_2/DWconv_2.2/PRelu 1 1 /ir_shuffle8/DWconv_2/DWconv_2.0/Conv_output_0 /ir_shuffle8/DWconv_2/DWconv_2.2/PRelu_output_0 0=1
+Convolution      /ir_shuffle8/conv_3/conv_3.0/Conv 1 1 /ir_shuffle8/DWconv_2/DWconv_2.2/PRelu_output_0 /ir_shuffle8/conv_3/conv_3.0/Conv_output_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18432
+BinaryOp         /ir_shuffle8/Add         2 1 /ir_shuffle8/conv_3/conv_3.0/Conv_output_0 /ir_shuffle8/Slice_1_output_0_splitncnn_0 /ir_shuffle8/Add_output_0 0=0
+Concat           /ir_shuffle8/Concat      2 1 /ir_shuffle8/Add_output_0 /ir_shuffle8/Slice_output_0 /ir_shuffle8/Concat_output_0 0=0
+ShuffleChannel   /ir_shuffle8/channel_shuffle/Reshape_1 1 1 /ir_shuffle8/Concat_output_0 /ir_shuffle8/channel_shuffle/Reshape_1_output_0 0=3 1=0
+Convolution      /PWConv1/Conv            1 1 /ir_shuffle8/channel_shuffle/Reshape_1_output_0 /PWConv1/Conv_output_0 0=512 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=98304
+ConvolutionDepthWise /DWConv1/Conv            1 1 /PWConv1/Conv_output_0 /DWConv1/Conv_output_0 0=512 1=6 11=7 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=21504 7=512
+Convolution      /PWConv2/Conv            1 1 /DWConv1/Conv_output_0 /PWConv2/Conv_output_0 0=128 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=65536
+Squeeze          /Squeeze                 1 1 /PWConv2/Conv_output_0 /Squeeze_output_0 -23303=1,1
+Squeeze          /Squeeze_1               1 1 /Squeeze_output_0 output -23303=1,1

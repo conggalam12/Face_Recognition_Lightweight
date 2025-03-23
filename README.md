@@ -27,4 +27,5 @@ CosFace : [https://arxiv.org/abs/1801.09414](https://arxiv.org/abs/1801.094140)
 # Develop
 I also applied facial recognition to the ncnn framework using C++ to optimize speed <br />
 You can see how to build and use with [NCNN](https://github.com/Tencent/ncnn) <br />
+Build [opencv](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html) C++ <br />
 

@@ -4,7 +4,7 @@ ShuffleFaceNet : [https://ieeexplore.ieee.org/document/9022220](https://ieeexplo
 MobileFaceNets : [https://arxiv.org/abs/1804.07573](https://arxiv.org/abs/1804.07573)<br>
 CusTom Model : [https://link.springer.com/article/10.1007/s00530-022-00973-z](https://link.springer.com/article/10.1007/s00530-022-00973-z)<br>
 
-Dataset : You can refer to the dataset source in this repo <br>
+Dataset: You can refer to the dataset source in this repo <br>
 [https://github.com/ZhaoJ9014/face.evoLVe](https://github.com/ZhaoJ9014/face.evoLVe)
 
 # Model
@@ -25,4 +25,6 @@ ArcFace : [https://arxiv.org/abs/1801.07698](https://arxiv.org/abs/1801.07698)<b
 CosFace : [https://arxiv.org/abs/1801.09414](https://arxiv.org/abs/1801.094140)
 
 # Develop
-I also applied facial recognition to the ncnn framework using C++ to optimize speed
+I also applied facial recognition to the ncnn framework using C++ to optimize speed <br />
+You can see how to build and use with [NCNN](https://github.com/Tencent/ncnn) <br />
+

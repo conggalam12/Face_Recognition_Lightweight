@@ -1,5 +1,5 @@
 # Method
-Here I used 3 models: ShuffleFaceNet, MobileFaceNet and Custom Model for the face recognition problem. <br>These are extremely small models with sizes under 5MB, helping to improve speed faster.You can see the paper here<br>
+I used 3 models, ShuffleFaceNet, MobileFaceNet, and Custom Model(sorry because I don't know the name of model), to solve the face recognition problem. <br>These are extremely small models with sizes under 5MB, helping to improve speed faster. You can see the paper here<br>
 ShuffleFaceNet : [https://ieeexplore.ieee.org/document/9022220](https://ieeexplore.ieee.org/document/9022220)<br>
 MobileFaceNets : [https://arxiv.org/abs/1804.07573](https://arxiv.org/abs/1804.07573)<br>
 CusTom Model : [https://link.springer.com/article/10.1007/s00530-022-00973-z](https://link.springer.com/article/10.1007/s00530-022-00973-z)<br>
@@ -7,6 +7,7 @@ CusTom Model : [https://link.springer.com/article/10.1007/s00530-022-00973-z](ht
 Dataset: You can refer to the dataset source in this repo <br>
 [https://github.com/ZhaoJ9014/face.evoLVe](https://github.com/ZhaoJ9014/face.evoLVe)
 
+Clean data: You can see my method to clean data here [Link](https://github.com/conggalam12/Face_Recognition_Lightweight/tree/main/clean_data)
 # Model
 
 <img src="https://github.com/user-attachments/assets/7f34823b-8070-4eaa-875c-3c353b6b4867" alt="Image Description" width="600" height="auto">
